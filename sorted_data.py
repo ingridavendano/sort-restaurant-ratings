@@ -20,7 +20,30 @@ def string_to_dict(text):
 def print_dict_alphabetically_by_key(dictionary):
 
     for key in sorted(dictionary.keys()):
-        print "Restaurant '%s' is rated at %s stars." % (key, dictionary[key])
+        is_there_any_quotes(key,dictionary[key])
+
+
+def print_with_a_new_list(dictionary):
+    stars = []
+    for key, value in dictionary.iteritems():
+        if value not in stars:
+            stars.append(value)
+
+    stars = sorted(stars)[::-1]
+    print stars
+
+    for rating in stars:
+        for key in sorted(dictionary.keys()):
+            if dictionary[key] == rating:
+               is_there_any_quotes(key,dictionary[key])
+
+
+def is_there_any_quotes(key, value):
+    if key.find("\'") != -1:
+        print 'Restaurant "%s" is rated at' % key, '*' * int(value)
+    else:
+        print "Restaurant '%s' is rated at" % key, '*' * int(value)
+ 
 
 
 def main():
@@ -28,8 +51,8 @@ def main():
 
     f = open(filename)
     filetext = f.read()
-    print_dict_alphabetically_by_key(string_to_dict(filetext))
-
+    # print_dict_alphabetically_by_key(string_to_dict(filetext))
+    print_with_a_new_list(string_to_dict(filetext))
 
 
 
