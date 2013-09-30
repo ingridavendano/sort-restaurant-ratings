@@ -27,15 +27,13 @@ def print_with_a_new_list(dictionary):
     stars = []
     for key, value in dictionary.iteritems():
         if value not in stars:
-            stars.append(value)
+            # stars.append(value)
+            stars.append((value, key))
 
     stars = sorted(stars)[::-1]
-    print stars
 
     for rating in stars:
-        for key in sorted(dictionary.keys()):
-            if dictionary[key] == rating:
-               is_there_any_quotes(key,dictionary[key])
+        is_there_any_quotes(rating[1],rating[0])
 
 
 def is_there_any_quotes(key, value):
